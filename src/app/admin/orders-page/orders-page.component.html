@@ -1,0 +1,39 @@
+<section *ngIf="orders.length; else empty" style="width: 80%; margin: 0 auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>№ п/п</th>
+                <th>Телефон</th>
+                <th>Адрес</th>
+                <th>ФИО</th>
+                <th>Цена</th>
+                <th>Дата добавления</th>
+                <th>Товары</th>
+                <th>Способ оплаты</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of orders; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ o.phone }}</td>
+                <td>{{ o.address }}</td>
+                <td>{{ o.name }}</td>
+                <td>{{ o.price }}</td>
+                <td>{{ o.date | date: 'short' }}</td>
+                <td>
+                    <div *ngFor="let g of o.goods">
+                        {{ g.name }}
+                    </div>
+                </td>
+                <td>{{ o.payment }}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="remove(o.id)">Удалить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<ng-template #empty class="text-center">
+    Заказов нет
+</ng-template>

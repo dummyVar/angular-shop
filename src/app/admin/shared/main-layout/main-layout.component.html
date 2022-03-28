@@ -1,0 +1,29 @@
+<header class="d-flex 
+justify-content-between 
+flex-column 
+flex-md-row 
+align-items-center 
+p-3 
+px-md-4 
+mb-3 
+bg-body 
+border-bottom 
+shadow-md">
+    <p routerLink="" 
+    style="color: rgb(192, 107, 107); cursor: pointer" 
+    class="h5 my-0 me-md-auto fw-bold">ШОП</p>
+
+    <nav *ngIf="authServ.isAuthenticated(); else login" class="my-2 my-md-0 me-md-3">
+        <a [routerLink]="['dashboard']" class="p-2 text-dark">Панель управления</a>
+        <a [routerLink]="['add']" class="p-2 text-dark">Добавить</a>
+        <a [routerLink]="['orders']" class="p-2 text-dark" >Заказы</a>
+        <a (click)="logOut($event)" class="btn btn-outline-danger">Выйти</a>
+    </nav>
+    <ng-template #login>
+        <button [routerLink]="['login']" class="btn btn-outline-primary">Войти</button>
+    </ng-template>
+   
+</header>
+
+
+<router-outlet></router-outlet>

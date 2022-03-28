@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~quill/dist/quill.snow.css';
+
+.ql-editor > p > img {
+    display: block;
+    max-height: 300px;
+    min-height: 300px;
+    margin: 0 auto;
+}
+

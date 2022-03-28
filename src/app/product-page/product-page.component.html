@@ -1,0 +1,28 @@
+<section *ngIf="product; else loading">
+  <article style="width: 100%; margin-top: -16px;"
+    class="bg-primary me-md-3 pt-3 px-3 pt-md-5 text-center text-white overflow-hidden">
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-light" routerLink="/">Назад</button>
+      <div style="width: 90%;" class="my-3 py-3">
+        <h2 class="display-5">{{ product.name }}</h2>
+      </div>
+    </div>
+    <div class="bg-light shadow-sm mx-auto" style="width: 80%; border-radius: 21px 21px 0 0;">
+      <div class="flex-center">
+        <quill-view-html [content]="product.photo"></quill-view-html>
+      </div>
+      <div>
+        <quill-view-html class="text-lead" style="color: black" [content]="product.desc"></quill-view-html>
+      </div>
+      <button class="btn btn-primary mb-3" [routerLink]="['/cart']" (click)="addProduct(product)">Купить</button>
+    </div>
+
+  </article>
+</section>
+<ng-template #loading>
+  <div class="d-flex justify-content-center align-items-center" style="width: 10%; margin: 0 auto;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>

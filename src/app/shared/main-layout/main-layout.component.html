@@ -1,0 +1,38 @@
+<header class="d-flex 
+justify-content-between 
+flex-column 
+flex-md-row 
+align-items-center 
+p-3 
+px-md-4 
+mb-3 
+bg-body 
+border-bottom 
+shadow-md">
+    <p routerLink="" 
+    style="color: rgb(192, 107, 107); cursor: pointer" 
+    class="h5 my-0 me-md-auto fw-bold">ШОП</p>
+
+    <div style="width: 50%; " class="form-floating mb-3 mt-3">
+        <input type="search" class="form-control"  placeholder="Поиск по наименованию:"
+        id="search"
+        [(ngModel)]="productName"
+        >
+        <label for="search">Поиск по наименованию</label>
+    </div>
+
+    <nav class="my-2 my-md-0 me-md-3" >
+        <a class="p-2 anchor text-dark"  (click)="setType('', $event)">Все товары</a>
+        <a class="p-2 anchor text-dark"  (click)="setType('Снасти', $event)">Снасти</a>
+        <a class="p-2 anchor text-dark"  (click)="setType('Лодки', $event)">Лодки</a>
+        <a class="p-2 anchor text-dark"  (click)="setType('Одежда', $event)">Одежда</a>
+    </nav>
+
+    <button class="btn btn-outline-primary" routerLink="/cart" (click)="setType('Корзина')">Корзина 
+        <span class="badge rounded-pill bg-danger new" *ngIf="productsServ.productCounter">{{ productsServ.productCounter }}</span>
+    </button>
+</header>
+<router-outlet></router-outlet>
+<section class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3" style="width: 80%; margin: 0 auto;">
+    <app-product [Product]="p" *ngFor="let p of products | async | sorting : productsServ.type | clientSearch : productName" class="col"></app-product>
+</section>

@@ -1,0 +1,51 @@
+<form [formGroup]="form" 
+    style="width: 300px;
+    margin: 0 auto;"
+>
+    <h1 class="h3 mb-3 fw-normal text-center">
+        Форма входа
+    </h1>
+    <div class="form-floating mb-3">
+        <input type="email" formControlName="email"
+        class="form-control" id="email" 
+        placeholder="XXXXX@XXXX.XX"
+        >
+        <label for="email">Почта:</label>
+        <div class="validation" 
+        *ngIf="f['email'].touched && f['email'].errors">
+            <small class="text-danger form-text" 
+            *ngIf="f['email'].errors['required']">
+                Поле обязательно для ввода
+            </small>
+            <small class="text-danger form-text" 
+            *ngIf="f['email'].errors['email']">
+                Поле должно содержать email
+            </small>
+        </div>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="password" formControlName="password"
+             id="password" 
+        placeholder="Пароль: "
+        >
+        <label for="email">Пароль:</label>
+        <div class="validation" 
+        *ngIf="f['password'].touched && f['password'].errors">
+            <small class="text-danger form-text" 
+            *ngIf="f['password'].errors['required']">
+                Поле обязательно для ввода
+            </small>
+            <small class="text-danger form-text" 
+            *ngIf="f['password'].errors['minlength']">
+                Пароль должен состоять из {{f['password'].errors['minlength'].requiredLength}} символов,
+                сейчас он состит из {{f['password'].errors['minlength'].actualLength}} символов.
+            </small>
+        </div>
+    </div>
+    <button [disabled]="submitted || form.invalid" 
+            class="w100 btn btn-primary"
+            (click)="submit()">
+            Войти
+    </button>
+</form>

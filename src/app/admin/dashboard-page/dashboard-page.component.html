@@ -1,0 +1,39 @@
+<section *ngIf="products.length; else empty" style="width: 80%; margin: 0 auto;">
+    <div class="form-floating mb-3">
+        <input type="search" class="form-control" placeholder="Поиск по наименованию:"
+        id="search"
+        [(ngModel)]="productName"
+        >
+        <label for="search">Поиск по наименованию</label>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>№ п/п</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Дата добавления (редактирования)</th>
+                <th>Редактирование</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of products | adminSearch : productName; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.price }}</td>
+                <td>{{ p.date | date: 'short' }}</td>
+                <td>
+                    <button class="btn btn-dark" 
+                    [routerLink]="['/admin', 'product', p.id, 'edit']">Редактировать</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="remove(p.id)">Удалить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<ng-template #empty class="text-center">
+    Товаров нет
+</ng-template>

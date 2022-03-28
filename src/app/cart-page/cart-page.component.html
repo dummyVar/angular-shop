@@ -1,0 +1,92 @@
+<div class="container" *ngIf="cartProducts.length > 0; else empty">
+    <h2 class="h4 text-center">Ваш заказ:</h2>
+    <table class="table table-striped">
+        <tbody>
+            <tr *ngFor="let p of cartProducts; let i = index">
+                <td>{{ p.name }}</td>
+                <td>{{ p.category }}</td>
+                <td>
+                    <button class="btn btn-danger" 
+                    (click)="delete(p)">Удалить товар</button>
+                </td>
+                <td>{{ p.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <b class="right">Итого: {{ totalPrice }}</b>
+    <div *ngIf="added" 
+    class="text-center text-danger">{{ added }}</div>
+
+    <form [formGroup]="form" 
+    style="width: 300px;
+    margin: 0 auto;"
+    >
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" formControlName="name"
+                id="name" 
+            placeholder="ФИО:"
+            >
+            <label for="name">ФИО:</label>
+            <div class="validation" 
+            *ngIf="f['name'].touched && f['name'].errors">
+                <small class="text-danger form-text" 
+                *ngIf="f['name'].errors['required']">
+                    Поле обязательно для ввода
+                </small>
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" formControlName="address"
+            id="address" 
+        placeholder="Адрес доставки:"
+        >
+        <label for="address">Адрес доставки:</label>
+        <div class="validation" 
+        *ngIf="f['address'].touched && f['address'].errors">
+            <small class="text-danger form-text" 
+            *ngIf="f['address'].errors['required']">
+                Поле обязательно для ввода
+            </small>
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" formControlName="phone"
+            id="phone" 
+        placeholder="Телефон для связи:"
+        >
+        <label for="phone">Телефон для связи:</label>
+        <div class="validation" 
+        *ngIf="f['phone'].touched && f['phone'].errors">
+            <small class="text-danger form-text" 
+            *ngIf="f['phone'].errors['required']">
+                Поле обязательно для ввода
+            </small>
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <select class="form-select mb-3" formControlName="payment" name="payment" id="payment">
+            <option value="Наличные">Наличные</option>
+            <option value="Карта">Карта</option>
+        </select>
+        <label for="payment">Адрес доставки:</label>
+        <div class="validation" 
+        *ngIf="f['payment'].touched && f['payment'].errors">
+            <small class="text-danger form-text" 
+            *ngIf="f['payment'].errors['required']">
+                Поле обязательно для ввода
+            </small>
+        </div>
+    </div>
+    <button [disabled]="submitted || form.invalid" 
+            class="w100 btn btn-primary"
+            (click)="submit()" >
+            Заказать
+    </button>
+    </form>
+</div>
+<ng-template #empty>
+    <h2 class="h4 text-center">
+        Корзина пуста
+    </h2>
+</ng-template>

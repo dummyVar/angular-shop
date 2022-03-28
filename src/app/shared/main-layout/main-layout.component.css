@@ -1,0 +1,21 @@
+.btn { 
+    position: relative;
+}
+
+.new {
+    position: absolute;
+    top: -11px;
+    right: -11px;
+}
+
+.active {
+    color: red !important;
+}
+
+a {
+    cursor: pointer;
+}
+
+input[type='search'] {
+    height: 40px;
+}

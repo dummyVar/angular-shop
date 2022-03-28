@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ],
+        "urls": [
+          "https://ang-shop-9d30a-default-rtdb.europe-west1.firebasedatabase.app/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [{
+    "name": "db",
+    "urls": [
+      "https://ang-shop-9d30a-default-rtdb.europe-west1.firebasedatabase.app/**"
+    ],
+    "cacheConfig": {
+      "maxAge": "3600",
+      "maxSize": 10
+    }
+  }]
+}
