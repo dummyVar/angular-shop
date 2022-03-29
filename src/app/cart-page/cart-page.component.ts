@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { OrdersService } from '../shared/orders.service';
 import { ProductsService } from '../shared/products.service';
 
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
-  styleUrls: ['./cart-page.component.css']
+  styleUrls: ['./cart-page.component.css'],
 })
 export class CartPageComponent implements OnInit {
-
   cartProducts: any[] = [];
   totalPrice: number = 0;
   added: string = '';
@@ -17,8 +21,10 @@ export class CartPageComponent implements OnInit {
   form!: FormGroup;
   submitted: boolean = false;
 
-  constructor(private productsServ: ProductsService,
-              private ordersServ: OrdersService) { }
+  constructor(
+    private productsServ: ProductsService,
+    private ordersServ: OrdersService
+  ) {}
 
   ngOnInit(): void {
     this.cartProducts = this.productsServ.cartProducts;
@@ -29,16 +35,16 @@ export class CartPageComponent implements OnInit {
       name: new FormControl(null, Validators.required),
       phone: new FormControl(null, Validators.required),
       address: new FormControl(null, Validators.required),
-      payment: new FormControl('Наличные', Validators.required)
-    })
+      payment: new FormControl('Наличные', Validators.required),
+    });
   }
 
-  get f(): {[key: string]: AbstractControl} {
+  get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
-  } 
+  }
 
   submit() {
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
@@ -51,15 +57,17 @@ export class CartPageComponent implements OnInit {
       payment: this.form.value.payment,
       goods: this.cartProducts,
       price: this.totalPrice,
-      date: new Date()
-    }
+      date: new Date(),
+    };
 
-    this.ordersServ.create(Order)
-    .subscribe(resp => {
-      this.form.reset();
-      this.added = 'Заказ отправлен на обработку';
-      this.submitted = false;
-    }, () => this.submitted = false);
+    this.ordersServ.create(Order).subscribe(
+      (resp) => {
+        this.form.reset();
+        this.added = 'Заказ отправлен на обработку';
+        this.submitted = false;
+      },
+      () => (this.submitted = false)
+    );
   }
 
   delete(Product: any) {
@@ -67,5 +75,4 @@ export class CartPageComponent implements OnInit {
     this.productsServ.productCounter--;
     this.cartProducts.splice(this.cartProducts.indexOf(Product), 1);
   }
-
 }
