@@ -9,9 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+<<<<<<< HEAD
     children: [{ path: '', redirectTo: '/', pathMatch: 'full' }],
   },
   { path: '', component: MainPageComponent },
+=======
+    children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: '', component: MainPageComponent },
+    ],
+  },
+>>>>>>> master
   { path: 'product/:id', component: ProductPageComponent },
   { path: 'cart', component: CartPageComponent },
   {
