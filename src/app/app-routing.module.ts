@@ -6,19 +6,23 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 const routes: Routes = [
-  {path: '', component: MainLayoutComponent, children: [
-    {path: '', redirectTo: '/', pathMatch: 'full'},
-    {path: '', component: MainPageComponent},
-    {path: 'product/:id', component: ProductPageComponent},
-    {path: 'cart', component: CartPageComponent}
-  ]},
-  {path: 'admin', loadChildren: 
-  () => import('./admin/admin.module')
-  .then(routes => routes.AdminModule) }
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [{ path: '', redirectTo: '/', pathMatch: 'full' }],
+  },
+  { path: '', component: MainPageComponent },
+  { path: 'product/:id', component: ProductPageComponent },
+  { path: 'cart', component: CartPageComponent },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((routes) => routes.AdminModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

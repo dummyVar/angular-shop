@@ -12,16 +12,31 @@ import { QuillModule } from 'ngx-quill';
 import { AdminSearchPipe } from '../shared/admin-search.pipe';
 import { AuthGuard } from '../shared/auth.guard';
 
-
 const routes: Routes = [
-  {path: '', component: MainLayoutComponent, children: [
-    {path: '', redirectTo: '/', pathMatch: 'full'},
-    {path: 'login', component: LoginPageComponent},
-    {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
-    {path: 'add', component: AddPageComponent, canActivate: [AuthGuard]},
-    {path: 'product/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]},
-    {path: 'orders', component: OrdersPageComponent, canActivate: [AuthGuard]}
-  ]}
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: 'login', component: LoginPageComponent },
+      {
+        path: 'dashboard',
+        component: DashboardPageComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: 'add', component: AddPageComponent, canActivate: [AuthGuard] },
+      {
+        path: 'product/:id/edit',
+        component: EditPageComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'orders',
+        component: OrdersPageComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -32,17 +47,15 @@ const routes: Routes = [
     LoginPageComponent,
     OrdersPageComponent,
     MainLayoutComponent,
-    AdminSearchPipe
+    AdminSearchPipe,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
-export class AdminModule { }
+export class AdminModule {}
